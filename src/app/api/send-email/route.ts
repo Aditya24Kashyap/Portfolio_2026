@@ -1,0 +1,221 @@
+import { type NextRequest, NextResponse } from "next/server";
+import nodemailer, { type Transporter } from "nodemailer";
+import { z } from "zod";
+import { render } from "@react-email/render";
+import { env } from "~/env";
+import { ContactNotificationEmail } from "~/emails/contact-notification";
+import { ThankYouEmail } from "~/emails/thank-you";
+import { rateLimit } from "~/utils/rate-limit";
+import { prodUrl } from "~/constants/app-info";
+
+// Define the type for the request body
+interface EmailRequestBody {
+  message: string;
+  email?: string;
+  name?: string;
+}
+
+// Define type for email response
+interface EmailResponse {
+  messageId: string;
+}
+
+// Environment validation schema
+const envSchema = z.object({
+  GMAIL_APP_ID: z.string().min(1),
+  GMAIL_APP_PASSWORD: z.string().min(1),
+  EMAIL_TO: z.string().email(),
+});
+
+type EnvSchema = z.infer<typeof envSchema>;
+
+// Validate environment variables
+function validateEnv(): EnvSchema {
+  const parsed = envSchema.safeParse({
+    GMAIL_APP_ID: env.GMAIL_APP_ID,
+    GMAIL_APP_PASSWORD: env.GMAIL_APP_PASSWORD,
+    EMAIL_TO: env.EMAIL_TO,
+  });
+
+  if (!parsed.success) {
+    throw new z.ZodError(parsed.error.errors);
+  }
+
+  return parsed.data;
+}
+
+const emailSchema = z.object({
+  message: z
+    .string()
+    .min(1, "Message is required")
+    .max(1000, "Message too long"),
+  email: z.string().email("Invalid email address").optional(),
+  name: z.string().optional(),
+});
+
+// Separate function to send thank you email in the background
+async function sendThankYouEmail(
+  transporter: Transporter,
+  senderEmail: string,
+  name: string | undefined,
+  message: string,
+  fromEmail: string,
+) {
+  try {
+    const thankYouEmailHtml = await render(ThankYouEmail({ name, message }));
+
+    const viewerMailOptions = {
+      from: fromEmail,
+      to: senderEmail,
+      subject: "Thank you for your message!",
+      html: thankYouEmailHtml,
+    };
+
+    await transporter.sendMail(viewerMailOptions);
+    console.log("Thank you email sent successfully");
+  } catch (error) {
+    console.error("Error sending thank you email:", error);
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    // Rate limiting: 5 requests per minute per IP
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+      "unknown";
+    const rateLimitResult = rateLimit(ip, { maxRequests: 5, windowMs: 60_000 });
+    if (!rateLimitResult.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Too many requests. Please try again later.",
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(rateLimitResult.retryAfterSeconds),
+          },
+        },
+      );
+    }
+
+    // CSRF protection: verify the request originates from our domain
+    const origin = request.headers.get("origin");
+    const allowedOrigins = [
+      prodUrl.replace(/\/$/, ""),
+      "http://localhost:3000",
+    ];
+    if (!origin || !allowedOrigins.includes(origin)) {
+      return NextResponse.json(
+        { success: false, error: "Forbidden" },
+        { status: 403 },
+      );
+    }
+
+    // Validate environment variables first
+    const validEnv = validateEnv();
+
+    const body = (await request.json()) as EmailRequestBody;
+    const { message, email, name } = emailSchema.parse(body);
+
+    // Create a transporter object using Gmail SMTP settings
+    const transporter: Transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: validEnv.GMAIL_APP_ID,
+        pass: validEnv.GMAIL_APP_PASSWORD,
+      },
+    });
+
+    // Verify transporter
+    await new Promise((resolve, reject) => {
+      transporter.verify((error: Error | null) => {
+        if (error) {
+          console.log("Transporter verification error:", error);
+          reject(error);
+        } else {
+          console.log("Ready to Send");
+          resolve(true);
+        }
+      });
+    });
+
+    // Generate HTML for notification email using React Email
+    const notificationEmailHtml = await render(
+      ContactNotificationEmail({ name, email, message }),
+    );
+
+    // Email to you (the portfolio owner)
+    // Use authenticated Gmail as sender; include visitor's email in reply-to
+    const myMailOptions = {
+      from: validEnv.GMAIL_APP_ID,
+      replyTo: email,
+      to: validEnv.EMAIL_TO,
+      subject: "New Contact Form Message from Portfolio",
+      html: notificationEmailHtml,
+    };
+
+    // Send email to you
+    const myResponse = (await transporter.sendMail(
+      myMailOptions,
+    )) as EmailResponse;
+
+    // Send confirmation email to the sender in the background (if email provided)
+    if (email) {
+      // Fire and forget - don't await (makes user experience feels faster)
+      void sendThankYouEmail(
+        transporter,
+        email,
+        name,
+        message,
+        validEnv.EMAIL_TO,
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Email sent successfully!",
+      myResponse: myResponse.messageId,
+    });
+  } catch (error) {
+    console.error("Email sending error:", error);
+
+    if (error instanceof z.ZodError) {
+      // Determine if it's an environment validation error or form validation error
+      const isEnvError = error.errors.some((err) =>
+        ["GMAIL_APP_ID", "GMAIL_APP_PASSWORD", "EMAIL_TO"].includes(
+          err.path[0] as string,
+        ),
+      );
+
+      if (isEnvError) {
+        return NextResponse.json(
+          {
+            success: false,
+            error:
+              "Email service not configured. Please contact the administrator.",
+          },
+          { status: 500 },
+        );
+      }
+
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid input data",
+          details: error.errors,
+        },
+        { status: 400 },
+      );
+    }
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Failed to send email. Please try again later.",
+      },
+      { status: 500 },
+    );
+  }
+}
