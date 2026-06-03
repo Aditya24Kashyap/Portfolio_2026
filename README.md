@@ -1,10 +1,8 @@
-# Design Portfolio - Progressive Web App (PWA)
+# Portfolio - Progressive Web App (PWA)
 
 A modern, responsive, fully server-side rendered portfolio website built as a **Progressive Web App** with the powerful [T3 Stack](https://create.t3.gg/). This PWA portfolio showcases work, experience, and provides a seamless way for potential clients or employers to connect, with native app-like experience across all devices.
 
 ![OG Image](./public/og-image.png)
-
-# Live Link: [https://design-portfolio-eight-gules.vercel.app/](https://design-portfolio-eight-gules.vercel.app/)
 
 ## 🌟 Features
 
