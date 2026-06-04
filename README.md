@@ -182,4 +182,3 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Built with ❤️ using the T3 Stack and PWA best practices**
