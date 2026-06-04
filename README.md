@@ -19,7 +19,7 @@ A modern, responsive, fully server-side rendered portfolio website built as a **
   - `/experience`: Professional experience and skills
   - `/connect`: Contact form and social links
 
-## 📱 PWA Features
+## 📱 Portfolio Features
 
 - **Installable**: Add to home screen on mobile devices and desktop
 - **Standalone Mode**: Runs in full-screen mode without browser UI
