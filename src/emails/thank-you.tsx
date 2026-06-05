@@ -101,16 +101,12 @@ export const ThankYouEmail = ({ name, message }: ThankYouEmailProps) => (
               LinkedIn
             </Link>
             <span style={socialDivider}>•</span>
-            <Link href={socialLinkEnum.x} style={socialLink}>
-              X
+            <Link href={socialLinkEnum.github} style={socialLink}>
+              GitHub
             </Link>
             <span style={socialDivider}>•</span>
-            <Link href={socialLinkEnum.dribbble} style={socialLink}>
-              Dribbble
-            </Link>
-            <span style={socialDivider}>•</span>
-            <Link href={socialLinkEnum.behance} style={socialLink}>
-              Behance
+            <Link href={socialLinkEnum.leetcode} style={socialLink}>
+              LeetCode
             </Link>
           </div>
         </Section>
@@ -120,9 +116,9 @@ export const ThankYouEmail = ({ name, message }: ThankYouEmailProps) => (
           <Text style={signature}>
             Best regards,
             <br />
-            <strong>Ritu Gaur</strong>
+            <strong>Aditya Kashyap</strong>
           </Text>
-          <Text style={footerText}>Student & Designer</Text>
+          <Text style={footerText}>Software Engineer · MSIT Delhi &apos;26</Text>
           <Text style={footerSubtext}>
             {`This is an automated response. I'll personally reply to your message soon!`}
           </Text>

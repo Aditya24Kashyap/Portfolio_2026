@@ -1,34 +1,35 @@
 export const projectsData = [
   {
     id: 1,
-    name: "Instant Commerce",
+    name: "Browser IDE",
     description:
-      "A modern e-commerce platform with ai agent with autonomous workflows",
-    image: "/work/instant-commerce.png", // You can replace with actual project images
-    tags: ["AI", "E-commerce", "Graphics"],
+      "Full-stack browser IDE with Monaco Editor, in-browser Node.js execution via WebContainers API, and an xterm.js terminal. Integrated local LLMs (Ollama/codellama) with streaming completions, OAuth 2.0 (Google & GitHub via NextAuth v5), MongoDB session persistence via Prisma, and 6 bootstrapped project templates.",
+    image: "/work/instant-commerce.png",
+    tags: ["Next.js 15", "TypeScript", "WebContainers", "MongoDB", "Ollama"],
     status: "Completed",
-    date: "May",
-    href: "https://www.figma.com/proto/V0gqcvrLqb8H05Mo90mOCL/Portfolio?node-id=60-34&t=3QozI3ydj9zgIlkI-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3601",
+    date: "2025",
+    href: "https://github.com/Aditya24Kashyap",
   },
   {
     id: 2,
-    name: "VISA x KMB",
+    name: "Packet Inspector",
     description:
-      "Financial technology solution bridging traditional banking with modern digital payments",
-    image: "/work/visa.png", // You can replace with actual project images
-    tags: ["FinTech", "Banking", "UX/UI"],
+      "Multithreaded Deep Packet Inspection engine in C++17. Parses PCAP files, extracts TLS SNI from Client Hello packets, and classifies HTTPS traffic (YouTube, Facebook etc.) without decryption. Uses a producer-consumer thread pool with consistent hashing and mutex/condition variable synchronisation.",
+    image: "/work/sync-node.png",
+    tags: ["C++17", "POSIX Threads", "TCP/IP", "TLS", "DPI"],
     status: "Completed",
-    date: "April",
-    href: "https://www.figma.com/proto/V0gqcvrLqb8H05Mo90mOCL/Portfolio?node-id=1-298&t=3QozI3ydj9zgIlkI-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3601",
+    date: "2025",
+    href: "https://github.com/Aditya24Kashyap",
   },
   {
     id: 3,
-    name: "Sync Node",
-    description: "Real-time block conversion with power of llms",
-    image: "/work/sync-node.png", // You can replace with actual project images
-    tags: ["Marketing", "Twitter", "Blockchain"],
+    name: "CortexDB",
+    description:
+      "Vector database built from scratch with HNSW (O(log N) — same algorithm as Pinecone & Weaviate), KD-Tree, and brute-force search across cosine, Euclidean, and Manhattan metrics. Full RAG pipeline: 768D embeddings via nomic-embed-text, overlapping chunking, HNSW retrieval, and LLM answers via llama3.2 over a REST API.",
+    image: "/work/visa.png",
+    tags: ["C++17", "Python", "HNSW", "RAG", "Ollama"],
     status: "Completed",
-    date: "Dec 2024",
-    href: "https://www.figma.com/proto/V0gqcvrLqb8H05Mo90mOCL/Portfolio?node-id=1-2912&t=3QozI3ydj9zgIlkI-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A3601",
+    date: "2025",
+    href: "https://github.com/Aditya24Kashyap",
   },
 ];

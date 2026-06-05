@@ -3,10 +3,10 @@ import { appInfo } from "~/constants/app-info";
 
 export default function Manifest(): MetadataRoute.Manifest {
   return {
-    name: appInfo.title || "Aditya Kashyap - Software Engineering Student",
-    short_name: appInfo.title || "Aditya Kashyap - Software Engineering Student",
+    name: appInfo.title || "Aditya Kashyap — Software Engineer",
+    short_name: appInfo.title || "Aditya Kashyap",
     description:
-      appInfo.description || "Portfolio | Aditya Kashyap - Software Engineering Student",
+      appInfo.description || "Software Engineer · C++ · Full Stack · MSIT Delhi '26",
     start_url: "/",
     display: "standalone",
     background_color: "#fdfff4",

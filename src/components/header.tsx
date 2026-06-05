@@ -1,12 +1,32 @@
-import { ArrowLeftIcon } from "./phosphorous-icons";
+"use client";
+
+import { ArrowLeftIcon, SunIcon, MoonIcon } from "./phosphorous-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import NavigationItem from "./comman/navigation-item";
 import { homeUrl, navigationRoutes } from "~/constants/navigation-routes";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const pathname = usePathname();
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = stored ? stored === "dark" : prefersDark;
+    setDark(isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+  };
+
   return (
     <header className="mt-3 flex w-full items-center justify-between px-8 py-6 sm:mt-10">
       <div className="flex items-center">
@@ -32,6 +52,13 @@ export default function Header() {
         {navigationRoutes.map((route) => (
           <NavigationItem key={route.name} {...route} />
         ))}
+        <button
+          onClick={toggleTheme}
+          aria-label="Toggle dark mode"
+          className="flex items-center justify-center text-gray-600 transition-colors hover:text-gray-900"
+        >
+          {dark ? <SunIcon size={14} /> : <MoonIcon size={14} />}
+        </button>
       </nav>
     </header>
   );

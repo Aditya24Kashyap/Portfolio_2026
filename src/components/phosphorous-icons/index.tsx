@@ -16,6 +16,10 @@ import {
   BehanceLogoIcon as PhosphorBehanceLogoIcon,
   EnvelopeSimpleIcon as PhosphorEnvelopeSimpleIcon,
   LinkedinLogoIcon as PhosphorLinkedinLogoIcon,
+  GithubLogoIcon as PhosphorGithubLogoIcon,
+  FilePdfIcon as PhosphorFilePdfIcon,
+  SunIcon as PhosphorSunIcon,
+  MoonIcon as PhosphorMoonIcon,
 } from "@phosphor-icons/react";
 
 function StarFourIcon() {
@@ -98,6 +102,22 @@ function LinkedinLogoIcon() {
   return <PhosphorLinkedinLogoIcon size={12} />;
 }
 
+function GithubLogoIcon() {
+  return <PhosphorGithubLogoIcon size={12} />;
+}
+
+function FilePdfIcon() {
+  return <PhosphorFilePdfIcon size={12} />;
+}
+
+function SunIcon({ size = 14 }: { size?: number }) {
+  return <PhosphorSunIcon size={size} />;
+}
+
+function MoonIcon({ size = 14 }: { size?: number }) {
+  return <PhosphorMoonIcon size={size} />;
+}
+
 export {
   StarFourIcon,
   StarFourIconSimple,
@@ -116,4 +136,8 @@ export {
   BehanceLogoIcon,
   EnvelopeSimpleIcon,
   LinkedinLogoIcon,
+  GithubLogoIcon,
+  FilePdfIcon,
+  SunIcon,
+  MoonIcon,
 };

@@ -22,7 +22,7 @@ export default async function Image() {
         'Content-Type': 'image/png',
       },
     })
-  } catch (error) {
+  } catch {
     // Fallback: generate a simple image if the file doesn't exist
     return new ImageResponse(
       (
@@ -44,7 +44,7 @@ export default async function Image() {
             Experience
           </div>
           <div style={{ fontSize: 32, opacity: 0.9 }}>
-            Aditya Kashyap - Software Engineering Student
+            Aditya Kashyap — Software Engineer
           </div>
         </div>
       ),

@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 // Image metadata
-export const alt = 'Connect with Aditya Kashyap - Software Engineering Student'
+export const alt = 'Connect with Aditya Kashyap — Software Engineer'
 export const size = {
   width: 1200,
   height: 630,
@@ -22,7 +22,7 @@ export default async function Image() {
         'Content-Type': 'image/png',
       },
     })
-  } catch (error) {
+  } catch {
     // Fallback: generate a simple image if the file doesn't exist
     return new ImageResponse(
       (
@@ -44,7 +44,7 @@ export default async function Image() {
             Let&apos;s Connect!
           </div>
           <div style={{ fontSize: 32, opacity: 0.9 }}>
-            Aditya Kashyap - Software Engineering Student
+            Aditya Kashyap — Software Engineer
           </div>
         </div>
       ),

@@ -3,8 +3,9 @@ import HeroBanner from "~/components/hero-banner";
 import ExperienceList from "~/components/experience-list";
 
 export const metadata = {
-  title: "Work Experience | Aditya Kashyap - Software Engineering Student",
-  description: "My professional experience",
+  title: "Experience | Aditya Kashyap — Software Engineer",
+  description:
+    "Open source contributor at GSSoC Extended 2025. AI/ML training at YBI Foundation. Final-year B.Tech ECE at MSIT Delhi.",
 };
 
 export default function ExperiencePage() {
@@ -12,7 +13,7 @@ export default function ExperiencePage() {
     <React.Fragment>
       <HeroBanner
         title="Experience"
-        subtitle="recent freelance, internships"
+        subtitle="open source · internships · training"
         openToWork={true}
       />
       <ExperienceList />
