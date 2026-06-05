@@ -1,184 +1,144 @@
-# Portfolio - 2026
+# Aditya Kashyap — Portfolio 2026
 
-A modern, responsive, fully server-side rendered portfolio website built as a **Progressive Web App** with the powerful [T3 Stack](https://create.t3.gg/). This PWA portfolio showcases work, experience, and provides a seamless way for potential clients or employers to connect, with native app-like experience across all devices.
+A modern, minimal, fully server-side rendered portfolio website built as a **Progressive Web App** with the [T3 Stack](https://create.t3.gg/).
 
-![OG Image](../public/og-image.png)
+![OG Image](./public/og-image.png)
+
+## 👨‍💻 About
+
+Final-year B.Tech (ECE) student at **Maharaja Surajmal Institute of Technology, Delhi**. Builds production-grade systems — multithreaded engines, vector databases from scratch, and full-stack web apps. Strong foundations in C++, DSA, and Computer Networks. 300+ LeetCode problems solved — contest rating **1800+, top 10%**.
 
 ## 🌟 Features
 
-- **Progressive Web App**: Installable on any device with native app-like experience
-- **Modern Design**: Built with Next.js 15 and Tailwind CSS for a beautiful, responsive interface
-- **Type Safety**: End-to-end type safety with TypeScript
-- **Server-Side Rendering**: Fully server-side rendered for optimal performance and SEO
-- **Offline Ready**: PWA capabilities for enhanced user experience
-- **Cross-Platform**: Works seamlessly on desktop, mobile, and tablet devices
-- **App-like Experience**: Native splash screens, icons, and standalone display mode
-- **Contact Form**: Integrated email functionality using Gmail API
-- **Dynamic Routes**:
-  - `/`: Home page/Portfolio showcase
-  - `/experience`: Professional experience and skills
-  - `/connect`: Contact form and social links
+- **Progressive Web App** — installable on any device with native app-like experience
+- **Dark / Light Mode** — toggle in navbar, persists via localStorage
+- **Minimal Design** — calm cream background, serif typography, no gradients
+- **Server-Side Rendering** — fully SSR for optimal performance and SEO
+- **Contact Form** — Gmail-powered with rate limiting and thank-you emails
+- **Skills Section** — grouped by Languages, Frontend/Backend, Databases, Core CS, Tools
+- **Experience & Education** — displayed on homepage
+- **Responsive** — works on desktop, tablet, and mobile
 
-## 📱 Portfolio Features
+## 📄 Pages
 
-- **Installable**: Add to home screen on mobile devices and desktop
-- **Standalone Mode**: Runs in full-screen mode without browser UI
-- **Custom Icons**: Optimized icons for all device sizes and platforms
-- **Splash Screens**: Native splash screens for iOS devices (iPhone 16 series support included)
-- **Responsive**: Adapts to all screen sizes from mobile to desktop
-- **Fast Loading**: Optimized for performance with SSR and modern web technologies
+| Route | Description |
+|---|---|
+| `/` | Homepage — hero, bio, projects, experience, skills, education |
+| `/experience` | Full experience and open source contributions |
+| `/connect` | Contact form with Gmail integration |
 
-### 📲 Installation Instructions
+## 🚀 Projects Showcased
 
-**On Mobile (iOS/Android):**
-1. Open the website in your browser
-2. Tap the "Share" button (iOS) or menu button (Android)
-3. Select "Add to Home Screen"
-4. The app will be installed and accessible from your home screen
-
-**On Desktop (Chrome/Edge):**
-1. Visit the website
-2. Look for the install icon in the address bar
-3. Click "Install" to add the app to your desktop
-4. Launch from your applications folder or desktop
+| Project | Stack | Description |
+|---|---|---|
+| **Browser IDE** | Next.js 15, TypeScript, WebContainers, MongoDB, Ollama | Full-stack browser IDE with Monaco Editor, in-browser Node.js execution, local LLM integration |
+| **Packet Inspector** | C++17, POSIX Threads, TCP/IP, TLS | Multithreaded Deep Packet Inspection engine — parses PCAP, extracts TLS SNI, classifies HTTPS traffic |
+| **CortexDB** | C++17, Python, HNSW, RAG, Ollama | Vector database from scratch with HNSW (same algorithm as Pinecone/Weaviate) + full RAG pipeline |
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org) - React framework for production with SSR
-- **PWA**: Native Progressive Web App capabilities with manifest and optimized assets
-- **Styling**: [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
-- **Email**: Gmail API integration for contact form
-- **Type Safety**: TypeScript for enhanced development experience
-- **Code Quality**:
-  - ESLint for code linting
-  - Prettier for code formatting
+- **Framework** — [Next.js 15](https://nextjs.org) with App Router
+- **Language** — TypeScript
+- **Styling** — [Tailwind CSS](https://tailwindcss.com)
+- **Icons** — Phosphor Icons
+- **Email** — Nodemailer + Gmail SMTP + React Email templates
+- **Validation** — Zod + T3 Env
+- **PWA** — Web App Manifest + splash screens
 
-## 🚀 Getting Started
+## 🏁 Getting Started
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-3. Set up environment variables:
-   - Copy `.env.example` to `.env.local`
-   - Configure your Gmail credentials:
-     - GMAIL_APP_ID: Your Gmail address
-     - GMAIL_APP_PASSWORD: Your 16-character app password
-     - EMAIL_TO: Destination email for contact form
+**1. Clone the repo**
+```bash
+git clone https://github.com/Aditya24Kashyap/Portfolio_2026.git
+cd Portfolio_2026
+```
 
-4. Run the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+**2. Install dependencies**
+```bash
+npm install
+```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+**3. Set up environment variables**
 
-## 📧 Email Configuration
+Create a `.env.local` file in the root:
+```
+GMAIL_APP_ID=your-gmail@gmail.com
+GMAIL_APP_PASSWORD=your-16-letter-app-password
+EMAIL_TO=your-gmail@gmail.com
+PROD_WEBSITE_URL=http://localhost:3000
+```
 
-The contact form uses Gmail API for sending emails. To set it up:
+To get a Gmail App Password:
+1. Go to **myaccount.google.com/apppasswords**
+2. Enable 2-Step Verification if not already on
+3. Generate a new app password → copy the 16-character password
+4. Paste it as `GMAIL_APP_PASSWORD` (no spaces)
 
-1. Enable 2-factor authentication in your Google Account
-2. Generate an app password:
-   - Go to Security > 2-Step Verification > App passwords
-   - Generate a new password for "Mail"
-3. Use the generated 16-character password in your `.env.local`
+**4. Run the dev server**
+```bash
+npm run dev
+```
 
-## 🎨 PWA Assets
+Open [http://localhost:3000](http://localhost:3000)
 
-The project includes comprehensive PWA assets:
+## 📦 Build for Production
 
-- **Manifest Icons**: Optimized icons for Android and web platforms
-- **Apple Touch Icons**: iOS-specific icons for home screen installation
-- **Apple Splash Screens**: Custom splash screens for all iPhone models (including iPhone 16 series)
-- **Favicon**: Multi-size favicon support
-- **Android Chrome Icons**: Optimized for Android Chrome installation
+```bash
+npm run build
+```
 
-All assets are automatically configured and served through the Next.js manifest system.
+All pages should show green checkmarks. Then deploy.
+
+## 🚀 Deploy on Vercel
+
+1. Push to GitHub
+2. Go to [vercel.com](https://vercel.com) → New Project → import `Portfolio_2026`
+3. Add the same 4 environment variables in **Settings → Environment Variables**
+4. Click Deploy
+
+> Make sure to update `PROD_WEBSITE_URL` to your actual Vercel URL after first deploy.
 
 ## 📁 Project Structure
 
 ```
 src/
-├── app/                    # Next.js 15 app directory
-│   ├── manifest.ts        # PWA manifest configuration
-│   ├── layout.tsx         # Root layout with PWA metadata
+├── app/                          # Next.js App Router pages
+│   ├── page.tsx                  # Homepage
+│   ├── experience/page.tsx       # Experience page
+│   ├── connect/page.tsx          # Contact page
+│   └── api/send-email/route.ts   # Email API route
+├── components/
+│   ├── homepage/
+│   │   ├── bio.tsx               # Bio paragraph
+│   │   ├── projects/             # Project chips with tooltips
+│   │   ├── skills.tsx            # Grouped skills section
+│   │   ├── experience-section.tsx # Experience on homepage
+│   │   └── education-section.tsx  # Education on homepage
+│   ├── header.tsx                # Navbar with dark mode toggle
 │   └── ...
-├── components/            # Reusable React components
-├── constants/             # App configuration and constants
-│   └── app-info.ts       # PWA metadata and splash screen config
-├── emails/               # Email templates
-└── styles/               # Global styles and Tailwind config
-public/
-├── manifest-icon-*.png   # PWA manifest icons
-├── apple-icon-*.png      # iOS app icons
-├── apple-splash-*.png    # iOS splash screens (38 variants)
-├── android-chrome-*.png  # Android icons
-└── favicon.*             # Favicon files
+├── constants/
+│   ├── projects.ts               # Project data
+│   ├── experience.ts             # Experience data
+│   ├── tools.tsx                 # Skills grouped by category
+│   └── index.tsx                 # Social links
+├── emails/                       # React Email templates
+└── styles/globals.css            # Global styles + dark mode
 ```
 
-## 🌐 Browser Compatibility
+## 📱 PWA Installation
 
-This PWA is compatible with:
+**Mobile (iOS/Android):**
+1. Open the site in your browser
+2. Tap Share → "Add to Home Screen"
 
-- **Chrome/Chromium**: Full PWA support including installation
-- **Safari (iOS/macOS)**: Native iOS app experience with splash screens
-- **Firefox**: Basic PWA functionality
-- **Edge**: Full PWA support including installation
-- **Samsung Internet**: Full PWA support on Android
-
-## ⚡ Performance Features
-
-- **Server-Side Rendering**: Fast initial page loads
-- **Optimized Images**: WebP format with fallbacks
-- **Code Splitting**: Automatic code splitting with Next.js
-- **Caching**: Optimized caching strategies for static assets
-- **Lighthouse Score**: Optimized for high performance, accessibility, and SEO scores
-
-## 🚀 Deployment
-
-The PWA is optimized for deployment on:
-
-- **Vercel** (recommended): Automatic PWA optimization
-- **Netlify**: Full PWA support with proper headers
-- **Any static hosting**: Works with any hosting that supports HTTPS
-
-### PWA Requirements for Production:
-- ✅ HTTPS (required for PWA features)
-- ✅ Valid manifest.json
-- ✅ Service worker (handled by Next.js)
-- ✅ Responsive design
-- ✅ Fast loading times
-
-## 📱 Testing PWA Features
-
-To test PWA functionality locally:
-
-1. Build the production version:
-   ```bash
-   npm run build
-   npm run start
-   ```
-
-2. Open Chrome DevTools > Application tab
-3. Check "Manifest" and "Service Workers" sections
-4. Use "Add to homescreen" option to test installation
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test PWA functionality
-5. Submit a pull request
+**Desktop (Chrome/Edge):**
+1. Look for the install icon in the address bar
+2. Click Install
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+MIT — feel free to fork and customize for your own portfolio.
 
 ---
 
+Built by [Aditya Kashyap](https://github.com/Aditya24Kashyap)
