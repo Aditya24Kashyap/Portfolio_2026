@@ -2,7 +2,7 @@
 
 A modern, minimal, fully server-side rendered portfolio website built as a **Progressive Web App** with the [T3 Stack](https://create.t3.gg/).
 
-![OG Image](./public/og-image.png)
+![Dark UI](./public/Portfolio_UI_Dark.png)
 
 ## 👨‍💻 About
 
